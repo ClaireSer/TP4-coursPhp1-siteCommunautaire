@@ -10,7 +10,7 @@
         <h1>Bienvenue sur mon site communautaire !</h1>
         <h2>Inscription :</h2>
  
-        <form action="../../controleur/inscription/index.php" method="post">
+        <form action="../../membres_inscription.php" method="post">
             <strong>Pseudo :</strong> <input type="text" name="pseudo" /> 
             <?php
             if (isset($_GET['pseudo'])) {

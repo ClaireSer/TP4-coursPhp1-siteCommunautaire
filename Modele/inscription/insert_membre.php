@@ -1,18 +1,18 @@
 <?php 
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=TP4-membres;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));           
-} catch(Exception $e) {
-    die('Erreur : '.$e->getMessage());
-}
 
-function inscription() {
-    // global $bdd;
+function insert_membre($pseudo, $pass_hache, $email) {
+    global $bdd;
     $req = $bdd->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES(:pseudo, :pass, :email, CURDATE())');
     $req->execute(array(
         'pseudo' => $pseudo,
         'pass' => $pass_hache,
         'email' => $email
         ));
+}
 
-    
+function pseudo_exists($pseudo) {
+    global $bdd;
+    $req = $bdd->prepare('SELECT pseudo FROM membres WHERE pseudo = ?');
+    $req->execute(array($pseudo));
+    return ($donnees = $req->fetch());
 }
